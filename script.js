@@ -1,3 +1,36 @@
+const ACCESS_TOKEN = "secretBirdSound123";
+
+const params = new URLSearchParams(window.location.search);
+const token = params.get("token");
+const sound = params.get("sound");
+
+if (token !== ACCESS_TOKEN) {
+  document.body.innerHTML = "<h2>🚫 Access Denied</h2><p>Invalid or missing token.</p>";
+  throw new Error("Access denied");
+}
+
+if (!sound) {
+  document.body.innerHTML = "<h2>🔊 No Sound Specified</h2><p>Please add a 'sound' parameter in the URL.</p>";
+  throw new Error("No sound provided");
+}
+
+// Create audio element
+const audio = document.createElement("audio");
+audio.controls = true;
+audio.src = `sounds/${sound}`;
+audio.style.width = "100%";
+audio.style.marginTop = "2rem";
+
+document.body.innerHTML = `
+  <h1 style="font-family:sans-serif; font-size:1.5rem">Playing: ${decodeURIComponent(sound)}</h1>
+`;
+document.body.appendChild(audio);
+
+
+
+
+
+/*
 // Configuration
 const ACCESS_TOKEN = "secretBirdSound123";
 
@@ -22,6 +55,7 @@ if (soundFile) {
 } else {
   document.body.innerHTML = "<p>No sound specified.</p>";
 }
+*/
 
 
 
