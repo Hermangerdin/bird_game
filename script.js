@@ -21,7 +21,9 @@ title.textContent = `Now Playing: ${decodeURIComponent(sound)}`;
 
 const audio = document.createElement("audio");
 audio.controls = true;
+console.log(`sounds/${decodeURIComponent(sound)}.mp3`);
 audio.src = `sounds/${decodeURIComponent(sound)}.mp3`;
+
 
 container.appendChild(title);
 container.appendChild(audio);
