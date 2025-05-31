@@ -18,8 +18,9 @@ if (!sound) {
 const audio = document.createElement("audio");
 audio.controls = true;
 audio.src = `sounds/${sound}`;
-audio.style.width = "100%";
-audio.style.marginTop = "2rem";
+audio.style.width = "90%";
+audio.style.marginTop = "30rem";
+audio.style.height = '30%'
 
 document.body.innerHTML = `
   <h1 style="font-family:sans-serif; font-size:1.5rem">Playing: ${decodeURIComponent(sound)}</h1>
