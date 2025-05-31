@@ -5,12 +5,12 @@ const token = params.get("token");
 const sound = params.get("sound");
 
 if (token !== ACCESS_TOKEN) {
-  document.body.innerHTML = "<h2>🚫 Access Denied</h2><p>Invalid or missing token.</p>";
+  document.body.innerHTML = "<h2>Access Denied</h2><p>Invalid or missing token.</p>";
   throw new Error("Access denied");
 }
 
 if (!sound) {
-  document.body.innerHTML = "<h2>🔊 No Sound Specified</h2><p>Please add a 'sound' parameter in the URL.</p>";
+  document.body.innerHTML = "<h2>No Sound Specified</h2><p>Please add a 'sound' parameter in the URL.</p>";
   throw new Error("No sound provided");
 }
 
@@ -21,7 +21,7 @@ title.textContent = `Now Playing: ${decodeURIComponent(sound)}`;
 
 const audio = document.createElement("audio");
 audio.controls = true;
-audio.src = `sounds/${sound}`;
+audio.src = `sounds/${sound}.mp3`;
 
 container.appendChild(title);
 container.appendChild(audio);
