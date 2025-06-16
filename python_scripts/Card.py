@@ -13,9 +13,9 @@ class Card:
 
 
     def card_is_valid(self):
-        return (self._bird_name != '') and (self._bird_name_latin != '') and  (self._wingspan != '') and (self._link != '') and (self._cat_nr != '') and (self._mapping != '')
+        return (self._bird_name != '') and (self._bird_name_latin != '') and  (self._wingspan != '')  and (self._cat_nr != '') and (self._mapping != '')
 
-    
+    #and (self._link != '')
 
 def fill_cards(excel_path):
     excel_file = pd.read_excel(excel_path)
@@ -25,7 +25,7 @@ def fill_cards(excel_path):
         card = Card()
         card._bird_name = str(excel_file['Namn'][index])
         card._bird_name_latin = str(excel_file['Namn latin'][index])
-        card._wingspan= str(excel_file['Vingspann'][index])
+        card._wingspan= str(excel_file['Vingspann'][index]).split('.')[0] + ' cm'
         card._link = str(excel_file['Länk till inspelning'][index])
         card._cat_nr = str(excel_file['Cat.nr'][index])
         card._mapping = str(excel_file['Mappning'][index])

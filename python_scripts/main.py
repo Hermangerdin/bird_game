@@ -21,6 +21,7 @@ if __name__ == "__main__":
             card_generator.draw_cards_on_pdf(fronts, backs)
             fronts = []
             backs = []
+            break
 
         fronts.append(card)
         backs.append(card)
