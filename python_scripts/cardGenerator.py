@@ -15,11 +15,13 @@ class CardGenerator:
 
         self.CARD_WIDTH_PT = (A4[0] - (self.MIN_SPACING_PT * (self.CARDS_PER_ROW + 1))) / self.CARDS_PER_ROW
         self.CARD_HEIGHT_PT = (A4[1] - (self.MIN_SPACING_PT * (self.CARDS_PER_COL + 1))) / self.CARDS_PER_COL
-        self.CARD_WIDTH_PX = int(self.CARD_WIDTH_PT * self.DPI / 72)
-        self.CARD_HEIGHT_PX = int(self.CARD_HEIGHT_PT * self.DPI / 72)
+        self.CARD_WIDTH_PX = round(self.CARD_WIDTH_PT * self.DPI / 72)
+        self.CARD_HEIGHT_PX = round(self.CARD_HEIGHT_PT * self.DPI / 72)
 
-        self.XSPACING = self.MIN_SPACING_PT
-        self.YSPACING = self.MIN_SPACING_PT
+        
+        self.XSPACING = self.MIN_SPACING_PT + (A4[0]-((self.CARD_WIDTH_PT * self.CARDS_PER_ROW) + (self.MIN_SPACING_PT  * 4)))/4
+        self.YSPACING = self.MIN_SPACING_PT + (A4[1]-((self.CARD_HEIGHT_PT * self.CARDS_PER_COL) + (self.MIN_SPACING_PT  * 4)))/4
+
 
         self.OUTPUT_DIR = "output_cards"
         os.makedirs(self.OUTPUT_DIR, exist_ok=True)
@@ -138,9 +140,19 @@ class CardGenerator:
                 filename = f"card_{idx}_{'f' if is_front else 'b'}_{int(time.time())}.png"
                 path = os.path.join(self.OUTPUT_DIR, filename)
                 card.save(path, dpi=(self.DPI, self.DPI))
-
+                
+                
                 x = self.XSPACING + col * (self.CARD_WIDTH_PT + self.XSPACING)
                 y = self.YSPACING + row * (self.CARD_HEIGHT_PT + self.YSPACING)
+
+                print(f"xspace:{self.XSPACING} y:space{self.YSPACING} x:{x} y:{y} rightX:{A4[0] - (x+self.CARD_WIDTH_PT)} downY:{A4[1]-(y + self.CARD_HEIGHT_PT)}")
+                print(f"xspace:{self.XSPACING * self.DPI / 72:.2f}px "
+                        f"yspace:{self.YSPACING * self.DPI / 72:.2f}px "
+                        f"x:{x * self.DPI / 72:.2f}px "
+                        f"y:{y * self.DPI / 72:.2f}px "
+                        f"rightX:{(A4[0] - (x + self.CARD_WIDTH_PT)) * self.DPI / 72:.2f}px "
+                        f"downY:{(A4[1] - (y + self.CARD_HEIGHT_PT)) * self.DPI / 72:.2f}px")
+
                 self._canvas.drawImage(path, x, y, width=self.CARD_WIDTH_PT, height=self.CARD_HEIGHT_PT)
 
         draw_cards(_fronts, True)
