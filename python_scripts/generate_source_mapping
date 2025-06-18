@@ -17,7 +17,7 @@ if not bird_col or not link_col:
     raise ValueError("Excel file must contain 'bird' and 'source_link' columns.")
 
 # Start the JS object
-js_lines = ["const soundMap = {\n"]
+js_lines = ["window.soundMap = {\n"]
 
 # Loop through data rows
 for row in ws.iter_rows(min_row=2):
@@ -34,7 +34,7 @@ for row in ws.iter_rows(min_row=2):
         js_lines.append(f'  "{bird}": "{link}",\n')
 
 js_lines.append("};\n")
-js_lines.append("export default soundMap;")
+#js_lines.append("export default soundMap;")
 
 # Write to JS file
 with open(output_js_file, "w", encoding="utf-8") as f:
