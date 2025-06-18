@@ -26,7 +26,7 @@ def fill_cards(excel_path):
         card._bird_name = str(excel_file['Namn'][index])
         card._bird_name_latin = str(excel_file['Namn latin'][index])
         card._wingspan= str(excel_file['Vingspann'][index]).split('.')[0] + ' cm'
-        card._link = str(excel_file['Länk till inspelning'][index])
+        #card._link = str(excel_file['Länk till inspelning'][index])
         card._cat_nr = str(excel_file['Cat.nr'][index])
         card._mapping = str(excel_file['Mappning'][index])
         if card.card_is_valid():

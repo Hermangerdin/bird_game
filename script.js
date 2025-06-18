@@ -5,7 +5,7 @@ const token = params.get("token");
 const sound = params.get("sound");
 
 if (token !== ACCESS_TOKEN) {
-  document.body.innerHTML = "<h2>Access Denied</h2><p>Invalid or missing token.</p>";
+  document.body.innerHTML = "<h2>Access Denied</h2><p>Invalid or missing token.</p>"; //Nice job chatGpt, very safe
   throw new Error("Access denied");
 }
 
@@ -34,11 +34,15 @@ audio.addEventListener("play", () => {
 const sourceButton = document.createElement("button");
 sourceButton.textContent = "Show Source";
 
+
 const sourceLink = document.createElement("a");
 sourceLink.href = window.soundMap[sound];
 sourceLink.textContent = `Source: ${window.soundMap[sound]}`;
 sourceLink.target = "_blank";
 sourceLink.style.display = "none";
+
+sourceButton.className = "source-toggle";
+sourceLink.className = "source-link";
 
 sourceButton.addEventListener("click", () => {
   if (sourceLink.style.display === "none" || sourceLink.style.display === "") {

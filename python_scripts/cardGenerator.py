@@ -126,10 +126,39 @@ class CardGenerator:
 
         return card
 
-    def draw_cards_on_pdf(self, front_images, back_images):
+    def create_card_back_special(self, _card):
+        card = Image.new("RGB", (self.CARD_WIDTH_PX, self.CARD_HEIGHT_PX), "white")
+        draw = ImageDraw.Draw(card)
+
+        self.draw_dual_border(draw)
+
+                # Title
+        text = "Birdster"
+        text_w = draw.textlength(text, self.font_birdster)
+        draw.text(((self.CARD_WIDTH_PX - text_w) / 2, 350), text, fill="black", font=self.font_birdster)
+
+        line_y = ((self.CARD_WIDTH_PX - text_w) / 2) +280
+        draw.line(
+            [(self.CARD_WIDTH_PX // 2 - text_w // 2, line_y),
+             (self.CARD_WIDTH_PX // 2 + text_w // 2, line_y)],
+            fill="black", width=4
+        )
+
+        img_wingspan = Image.open(r"images\\wingspan2.png").convert("RGBA").resize((300, 150), Image.LANCZOS)
+        card.paste(img_wingspan, (self.CARD_WIDTH_PX // 2 - 150, self.CARD_HEIGHT_PX - 200), img_wingspan)
+
+        return card
+
+
+
+
+
+    def draw_cards_on_pdf(self, front_images, back_images, special_cards):
         _fronts = [self.create_card_front(img) for img in front_images]
         _backs = self.reorder_cards([self.create_card_back(img) for img in back_images])
 
+        _special = [self.create_card_back_special(img) for img in special_cards]
+        
         def draw_cards(card_images, is_front):
             for idx, card in enumerate(card_images):
                 col = idx % self.CARDS_PER_ROW
@@ -154,11 +183,22 @@ class CardGenerator:
                         f"downY:{(A4[1] - (y + self.CARD_HEIGHT_PT)) * self.DPI / 72:.2f}px")
 
                 self._canvas.drawImage(path, x, y, width=self.CARD_WIDTH_PT, height=self.CARD_HEIGHT_PT)
+        if len(special_cards) == 9:
+            draw_cards(_special, False)    
+            self._canvas.showPage()
+            _special_again = [self.create_card_back_special(img) for img in special_cards]
+            draw_cards(_special_again,False)
+            self._canvas.showPage()
+        else:
+            print()
+            draw_cards(_fronts, True)
+            self._canvas.showPage()
+            draw_cards(_backs, False)
+            self._canvas.showPage()
 
-        draw_cards(_fronts, True)
-        self._canvas.showPage()
-        draw_cards(_backs, False)
-        self._canvas.showPage()
+
+
+
 
     def reorder_cards(self, cards):
         indices = [2, 1, 0, 5, 4, 3, 8, 7, 6]

@@ -41,4 +41,36 @@ audio {
   appearance: none;
 }
 
+/* Source Button */
+#player-container button {
+  background-color: #00796b;
+  color: #ffffff;
+  border: none;
+  border-radius: 0.75rem;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 1.5rem;
+  transition: background-color 0.3s ease;
+}
+
+#player-container button:hover {
+  background-color: #004d40;
+}
+
+/* Source Link */
+#player-container a {
+  display: inline-block;
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  color: #00695c;
+  text-decoration: none;
+  word-break: break-word;
+}
+
+#player-container a:hover {
+  text-decoration: underline;
+}
+
+
 
