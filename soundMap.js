@@ -1,4 +1,4 @@
-const soundMap = {
+window.soundMap = {
   "bird94": "https://xeno-canto.org/897708",
   "bird1": "https://xeno-canto.org/902551",
   "bird2": "https://xeno-canto.org/946780",

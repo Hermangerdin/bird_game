@@ -37,6 +37,9 @@ sourceButton.textContent = "Show Source";
 
 const sourceLink = document.createElement("a");
 sourceLink.href = window.soundMap[sound];
+console.log('abc')
+console.log(window.soundMap[sound]);
+console.log(sourceLink.href);
 sourceLink.textContent = `Source: ${window.soundMap[sound]}`;
 sourceLink.target = "_blank";
 sourceLink.style.display = "none";
@@ -45,6 +48,7 @@ sourceButton.className = "source-toggle";
 sourceLink.className = "source-link";
 
 sourceButton.addEventListener("click", () => {
+  
   if (sourceLink.style.display === "none" || sourceLink.style.display === "") {
     sourceLink.style.display = "inline-block";
     sourceButton.textContent = "Hide Source";
