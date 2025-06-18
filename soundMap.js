@@ -93,4 +93,3 @@ const soundMap = {
   "bird92": "https://xeno-canto.org/1006600",
   "bird93": "https://xeno-canto.org/989474",
 };
-export default soundMap;
