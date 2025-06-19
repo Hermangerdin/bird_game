@@ -17,7 +17,7 @@ if (!sound) {
 const container = document.getElementById("player-container");
 
 const title = document.createElement("h1");
-title.textContent = `Now Playing: ${decodeURIComponent(sound)}`;
+title.textContent = `Tryck på play för att spela!`;
 
 const audio = document.createElement("audio");
 audio.controls = true;
@@ -37,9 +37,6 @@ sourceButton.textContent = "Show Source";
 
 const sourceLink = document.createElement("a");
 sourceLink.href = window.soundMap[sound];
-console.log('abc')
-console.log(window.soundMap[sound]);
-console.log(sourceLink.href);
 sourceLink.textContent = `Source: ${window.soundMap[sound]}`;
 sourceLink.target = "_blank";
 sourceLink.style.display = "none";
@@ -54,7 +51,7 @@ sourceButton.addEventListener("click", () => {
     sourceButton.textContent = "Hide Source";
   } else {
     sourceLink.style.display = "none";
-    sourceButton.textContent = "Show Source";
+    sourceButton.textContent = "Visa källa";
   }
 });
 
