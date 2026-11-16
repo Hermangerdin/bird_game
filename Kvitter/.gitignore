@@ -1,0 +1,6 @@
+.venv/
+.venv-separation/
+__pycache__/
+*.py[cod]
+output/
+.models/bird_mixit/
